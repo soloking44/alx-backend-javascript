@@ -1,10 +1,13 @@
 const cleanSet = (set, startString) => {
-  if (!set || !startString || !(set instanceof Set) || typeof startString !== 'string') {
-    return '';
-  }
-  const filteredValues = Array.from(set).filter((value) => typeof value === 'string' && value.startsWith(startString));
-  const cleanedValues = filteredValues.map((value) => value.slice(startString.length));
-  return cleanedValues.join('-');
+  const strings = [];
+
+  if (startString === '' || typeof startString !== 'string') return '';
+  set.forEach((s) => {
+    if (typeof s === 'string' && s.startsWith(startString)) {
+      strings.push(s.slice(startString.length));
+    }
+  });
+  return strings.join('-');
 };
 
 export default cleanSet;
